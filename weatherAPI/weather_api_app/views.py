@@ -16,7 +16,7 @@ class CurrentWeather(APIView):
         if not city:
             return Response({'error': 'Please provide a city name'}, status=400)
 
-        url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=c61631d8485047e7d9ecc565cfac1c42'        
+        url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=c61631d8485047e7d9ecc565cfac1c42'        
         response = requests.get(url.format(city))
         # city_weather = requests.get(url)
 
@@ -25,7 +25,7 @@ class CurrentWeather(APIView):
         city_weather = response.json()
         weather = {
                 'city' : city,
-                'temperature' : round((city_weather['main']['temp']-32)/1.8), # converting fahrenheit to celsius
+                'temperature' : city_weather['main']['temp'], # converting fahrenheit to celsius
                 'description' : city_weather['weather'][0]['description'],
         }
 
@@ -63,6 +63,26 @@ class ForecastWeather(APIView):
         #         'temperature' : round((city_weather['main']['temp']-32)/1.8), # converting fahrenheit to celsius
         #         'description' : city_weather['weather'][0]['description'],
         # }
+
+        return Response(city_weather)
+    
+
+# Uses Statistical API from OpenWeatherMap for a monthly statistical data
+class HistoryWeather(APIView):
+    def post(self, request):
+        
+        city = request.data.get('city')
+
+        if not city:
+            return Response({'error': 'Please provide a city name'}, status=400)
+
+        url = 'https://history.openweathermap.org/data/2.5/aggregated/year?q={}&appid=c61631d8485047e7d9ecc565cfac1c42&units=metric'   #paid?    
+        response = requests.get(url.format(city)) # The input should be a city,country_code e.g. London,UK
+        # city_weather = requests.get(url)
+
+        if response.status_code != 200:
+            return Response({'error': 'Invalid city name or API key'}, status=400)
+        city_weather = response.json()
 
         return Response(city_weather)
 
