@@ -1,6 +1,5 @@
 from django.db import models
 
-# translates db code to python format
 
 # Create your models here.
 

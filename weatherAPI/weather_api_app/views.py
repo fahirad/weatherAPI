@@ -7,7 +7,7 @@ from weather_api_app.models import Weather
 from rest_framework.views import APIView
 # create and return data
 
- 
+# To be called when hitting a current weather endpoint
 class CurrentWeather(APIView):
     def post(self, request):
         
@@ -25,12 +25,13 @@ class CurrentWeather(APIView):
         city_weather = response.json()
         weather = {
                 'city' : city,
-                'temperature' : city_weather['main']['temp'], # converting fahrenheit to celsius
+                'temperature' : city_weather['main']['temp'], 
                 'description' : city_weather['weather'][0]['description'],
         }
 
         return Response(weather)
 
+# To be called when hitting a forecast weather endpoint
 class ForecastWeather(APIView):
     def post(self, request):
         
@@ -39,7 +40,7 @@ class ForecastWeather(APIView):
         if not city:
             return Response({'error': 'Please provide a city name'}, status=400)
 
-        url = 'https://api.openweathermap.org/data/2.5/forecast?q={},us&mode=json&appid=c61631d8485047e7d9ecc565cfac1c42&units=metric'        
+        url = 'https://api.openweathermap.org/data/2.5/forecast?q={}&cnt=10&mode=json&appid=c61631d8485047e7d9ecc565cfac1c42&units=metric'        
         response = requests.get(url.format(city))
         # city_weather = requests.get(url)
 
@@ -66,7 +67,7 @@ class ForecastWeather(APIView):
 
         return Response(city_weather)
     
-
+# To be called when hitting a historical weather endpoint
 # Uses Statistical API from OpenWeatherMap for a monthly statistical data
 class HistoryWeather(APIView):
     def post(self, request):
