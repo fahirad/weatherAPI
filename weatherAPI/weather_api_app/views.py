@@ -7,27 +7,8 @@ from weather_api_app.models import Weather
 from rest_framework.views import APIView
 # create and return data
 
-# Create your views here.
-# @api_view(['POST', 'GET'])
-# def city_weather(request):
-#     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=c61631d8485047e7d9ecc565cfac1c42'
-#     if request.method == 'POST':
-#         city = request.POST['city']
-#         city_weather = requests.get(url.format(city)).json()
-#         # if city_weather.status_code == 200:
-#         weather = {
-#                 'city' : city,
-#                 'temperature' : city_weather['main']['temp'],
-#                 'description' : city_weather['weather'][0]['description'],
-#                 'icon' : city_weather['weather'][0]['icon']
-#             }
-
-#         return Response(weather)
-    
-    # else:
-    #     return JsonResponse({'error': 'Invalid city name'}, status=400)
-    
-class CityWeather(APIView):
+ 
+class CurrentWeather(APIView):
     def post(self, request):
         
         city = request.data.get('city')
@@ -44,11 +25,45 @@ class CityWeather(APIView):
         city_weather = response.json()
         weather = {
                 'city' : city,
-                'temperature' : city_weather['main']['temp'],
+                'temperature' : round((city_weather['main']['temp']-32)/1.8), # converting fahrenheit to celsius
                 'description' : city_weather['weather'][0]['description'],
         }
 
         return Response(weather)
 
+class ForecastWeather(APIView):
+    def post(self, request):
+        
+        city = request.data.get('city')
+
+        if not city:
+            return Response({'error': 'Please provide a city name'}, status=400)
+
+        url = 'https://api.openweathermap.org/data/2.5/forecast?q={},us&mode=json&appid=c61631d8485047e7d9ecc565cfac1c42&units=metric'        
+        response = requests.get(url.format(city))
+        # city_weather = requests.get(url)
+
+        if response.status_code != 200:
+            return Response({'error': 'Invalid city name or API key'}, status=400)
+        city_weather = response.json()
+        
+        # todo: handle averagin temps
+        days = []
+        for i in city_weather['list']:
+            day = i['dt_txt'][:10]
+            if day not in days:
+                days.append(day)
+                average_temp = i['main']['temp']
+            else:
+                average_temp += i['main']['temp']
+            
+
+        # weather = {
+        #         'city' : city,
+        #         'temperature' : round((city_weather['main']['temp']-32)/1.8), # converting fahrenheit to celsius
+        #         'description' : city_weather['weather'][0]['description'],
+        # }
+
+        return Response(city_weather)
 
 
