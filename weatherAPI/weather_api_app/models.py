@@ -5,9 +5,7 @@ from django.db import models
 # Create your models here.
 
 class Weather(models.Model):
-    city = models.CharField()
-    temperature = models.FloatField()
-    
+    name = models.CharField(max_length=25)
 
-    def __str__self():
-        return self.city
+    def __str__(self): #show the actual city name on the dashboard
+        return self.name
