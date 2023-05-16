@@ -59,12 +59,6 @@ class ForecastWeather(APIView):
                 average_temp += i['main']['temp']
             
 
-        # weather = {
-        #         'city' : city,
-        #         'temperature' : round((city_weather['main']['temp']-32)/1.8), # converting fahrenheit to celsius
-        #         'description' : city_weather['weather'][0]['description'],
-        # }
-
         return Response(city_weather)
     
 # To be called when hitting a historical weather endpoint
@@ -80,7 +74,7 @@ class HistoryWeather(APIView):
             return Response({'error': 'Please provide a city name'}, status=400)
 
         url = 'https://history.openweathermap.org/data/2.5/aggregated/month?q={}&month={}&appid=c61631d8485047e7d9ecc565cfac1c42'   #paid?    
-        response = requests.get(url.format(city,month)) # The input should be a city,country_code e.g. London,UK
+        response = requests.get(url.format(city,month)) # The input should be a city e.g. London and month e.g. 1
         # city_weather = requests.get(url)
 
         if response.status_code != 200:
