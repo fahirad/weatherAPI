@@ -83,7 +83,7 @@ class HistoryWeather(APIView):
         weather = {
             'city' : city,
             'month' : month,
-            'temperature' : city_weather['result']['temp']['mean'], #round((city_weather['result']['temp']['mean']-32)/1.8)
+            'temperature' : round((city_weather['result']['temp']['mean']-273.15),2), #round((city_weather['result']['temp']['mean']-32)/1.8)
         }
 
 #todo
