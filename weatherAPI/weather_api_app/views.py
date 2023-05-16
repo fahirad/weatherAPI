@@ -18,7 +18,7 @@ class CurrentWeather(APIView):
 
         url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=c61631d8485047e7d9ecc565cfac1c42'        
         response = requests.get(url.format(city))
-        # city_weather = requests.get(url)
+        
 
         if response.status_code != 200:
             return Response({'error': 'Invalid city name or API key'}, status=400)
@@ -42,7 +42,7 @@ class ForecastWeather(APIView):
 
         url = 'https://api.openweathermap.org/data/2.5/forecast?q={}&cnt=10&mode=json&appid=c61631d8485047e7d9ecc565cfac1c42&units=metric'        
         response = requests.get(url.format(city))
-        # city_weather = requests.get(url)
+       
 
         if response.status_code != 200:
             return Response({'error': 'Invalid city name or API key'}, status=400)
@@ -73,9 +73,9 @@ class HistoryWeather(APIView):
         if not city:
             return Response({'error': 'Please provide a city name'}, status=400)
 
-        url = 'https://history.openweathermap.org/data/2.5/aggregated/month?q={}&month={}&appid=c61631d8485047e7d9ecc565cfac1c42'   #paid?    
+        url = 'https://history.openweathermap.org/data/2.5/aggregated/month?q={}&month={}&appid=c61631d8485047e7d9ecc565cfac1c42'   
         response = requests.get(url.format(city,month)) # The input should be a city e.g. London and month e.g. 1
-        # city_weather = requests.get(url)
+        
 
         if response.status_code != 200:
             return Response({'error': 'Invalid city name or API key'}, status=400)
@@ -86,7 +86,6 @@ class HistoryWeather(APIView):
             'temperature' : round((city_weather['result']['temp']['mean']-273.15),2), #round((city_weather['result']['temp']['mean']-32)/1.8)
         }
 
-#todo
         return Response(weather)
 
 
