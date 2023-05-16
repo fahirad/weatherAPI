@@ -73,18 +73,26 @@ class HistoryWeather(APIView):
     def post(self, request):
         
         city = request.data.get('city')
-
+        month = request.data.get('month')
+        print(city)
+        print(month)
         if not city:
             return Response({'error': 'Please provide a city name'}, status=400)
 
-        url = 'https://history.openweathermap.org/data/2.5/aggregated/year?q={}&appid=c61631d8485047e7d9ecc565cfac1c42&units=metric'   #paid?    
-        response = requests.get(url.format(city)) # The input should be a city,country_code e.g. London,UK
+        url = 'https://history.openweathermap.org/data/2.5/aggregated/month?q={}&month={}&appid=c61631d8485047e7d9ecc565cfac1c42'   #paid?    
+        response = requests.get(url.format(city,month)) # The input should be a city,country_code e.g. London,UK
         # city_weather = requests.get(url)
 
         if response.status_code != 200:
             return Response({'error': 'Invalid city name or API key'}, status=400)
         city_weather = response.json()
+        weather = {
+            'city' : city,
+            'month' : month,
+            'temperature' : city_weather['result']['temp']['mean'], #round((city_weather['result']['temp']['mean']-32)/1.8)
+        }
 
-        return Response(city_weather)
+#todo
+        return Response(weather)
 
 
