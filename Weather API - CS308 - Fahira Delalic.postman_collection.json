@@ -1,0 +1,401 @@
+{
+	"info": {
+		"_postman_id": "5703b2aa-e96f-4f33-b7c0-20773568c34a",
+		"name": "Weather API - CS308 - Fahira Delalic",
+		"description": "# Introduction\n\nWhat does your API do?  \nIt uses OpenWeatherMap to obtain weather data for the given city. The different data can be current, historical or forecast.\n\n# Overview\n\nThe Weather API allows the user to fetch the weather information for a wanted city in terms of current data, historical (temperature for a desired month in the previous year) and forecast weather (3-hour data for 5 days).\n\nThe endpoint for each of those are as follows:\n\nStartFragment\n\n[http://127.0.0.1:8000/weather/current/](http://127.0.0.1:8000/weather/current/) -> takes a post request with _city_ information and returns a JSON object for the current weather\n\nStartFragment\n\n[http://127.0.0.1:8000/weather/forecast/](http://127.0.0.1:8000/weather/forecast/) -> takes a post request with _city_ information (in the form of \"city, country_code\" e.g. \"London,UK\") and returns a JSON object for the forecast weather\n\n[http://127.0.0.1:8000/weather/history/](http://127.0.0.1:8000/weather/forecast/) -> takes a post request with _city_ and _month_ information (in the form of city\", \"month\" e.g. \"\"city\":\"London\", \"month\":2) and returns a JSON object for the given month in the last year\n\nEndFragment\n\n# Authentication\n\nWhat is the preferred way of using the API?  \nNo authentication.\n\n# Error Codes\n\nWhat errors and status codes can a user expect?  \nPossible error codes that may happen is 400 if the user enters an invalid city name.\n\n# Rate limit\n\nIs there a limit to the number of requests a user can send?  \nYes. 60 requests per minute.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27203838"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:8000/weather/current/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"city\":\"Sarajevo\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/weather/current/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"weather",
+						"current",
+						""
+					]
+				},
+				"description": "User inputs the wanted city to be shown the curret weather data for"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"city\":\"Sarajevo\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/weather/current/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"weather",
+								"current",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:8000/weather/current/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/weather/current/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"weather",
+						"current",
+						""
+					]
+				},
+				"description": "The output is the current data for wanted city"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/weather/current/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"weather",
+								"current",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"city\": \"Sarajevo\",\n    \"temperature\": 17.95,\n    \"description\": \"overcast clouds\"\n}"
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:8000/weather/forecast/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"city\":\"Sarajevo,BA\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/weather/forecast/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"weather",
+						"forecast",
+						""
+					]
+				},
+				"description": "Note: Besides the city, country code needs to be added!"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"city\":\"Sarajevo,BA\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/weather/forecast/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"weather",
+								"forecast",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:8000/weather/forecast/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/weather/forecast/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"weather",
+						"forecast",
+						""
+					]
+				},
+				"description": "Returns 10 records of forecast data for the specificed city, each 3 hours apart"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/weather/forecast/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"weather",
+								"forecast",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"cod\": \"200\",\n    \"message\": 0,\n    \"cnt\": 10,\n    \"list\": [\n        {\n            \"dt\": 1684108800,\n            \"main\": {\n                \"temp\": 13.99,\n                \"feels_like\": 13.4,\n                \"temp_min\": 11.66,\n                \"temp_max\": 13.99,\n                \"pressure\": 1018,\n                \"sea_level\": 1018,\n                \"grnd_level\": 1014,\n                \"humidity\": 75,\n                \"temp_kf\": 2.33\n            },\n            \"weather\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 99\n            },\n            \"wind\": {\n                \"speed\": 2.37,\n                \"deg\": 327,\n                \"gust\": 8.04\n            },\n            \"visibility\": 10000,\n            \"pop\": 0.36,\n            \"sys\": {\n                \"pod\": \"n\"\n            },\n            \"dt_txt\": \"2023-05-15 00:00:00\"\n        },\n        {\n            \"dt\": 1684119600,\n            \"main\": {\n                \"temp\": 12.95,\n                \"feels_like\": 12.42,\n                \"temp_min\": 10.86,\n                \"temp_max\": 12.95,\n                \"pressure\": 1018,\n                \"sea_level\": 1018,\n                \"grnd_level\": 1014,\n                \"humidity\": 81,\n                \"temp_kf\": 2.09\n            },\n            \"weather\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04n\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 99\n            },\n            \"wind\": {\n                \"speed\": 3.93,\n                \"deg\": 326,\n                \"gust\": 8.49\n            },\n            \"visibility\": 10000,\n            \"pop\": 0.22,\n            \"sys\": {\n                \"pod\": \"n\"\n            },\n            \"dt_txt\": \"2023-05-15 03:00:00\"\n        },\n        {\n            \"dt\": 1684130400,\n            \"main\": {\n                \"temp\": 11.36,\n                \"feels_like\": 10.64,\n                \"temp_min\": 10.04,\n                \"temp_max\": 11.36,\n                \"pressure\": 1018,\n                \"sea_level\": 1018,\n                \"grnd_level\": 1015,\n                \"humidity\": 80,\n                \"temp_kf\": 1.32\n            },\n            \"weather\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 100\n            },\n            \"wind\": {\n                \"speed\": 4.61,\n                \"deg\": 346,\n                \"gust\": 10.01\n            },\n            \"visibility\": 10000,\n            \"pop\": 0.15,\n            \"sys\": {\n                \"pod\": \"d\"\n            },\n            \"dt_txt\": \"2023-05-15 06:00:00\"\n        },\n        {\n            \"dt\": 1684141200,\n            \"main\": {\n                \"temp\": 11.82,\n                \"feels_like\": 10.62,\n                \"temp_min\": 11.82,\n                \"temp_max\": 11.82,\n                \"pressure\": 1020,\n                \"sea_level\": 1020,\n                \"grnd_level\": 1017,\n                \"humidity\": 60,\n                \"temp_kf\": 0\n            },\n            \"weather\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 100\n            },\n            \"wind\": {\n                \"speed\": 5.66,\n                \"deg\": 351,\n                \"gust\": 8.19\n            },\n            \"visibility\": 10000,\n            \"pop\": 0,\n            \"sys\": {\n                \"pod\": \"d\"\n            },\n            \"dt_txt\": \"2023-05-15 09:00:00\"\n        },\n        {\n            \"dt\": 1684152000,\n            \"main\": {\n                \"temp\": 13.64,\n                \"feels_like\": 12.55,\n                \"temp_min\": 13.64,\n                \"temp_max\": 13.64,\n                \"pressure\": 1020,\n                \"sea_level\": 1020,\n                \"grnd_level\": 1017,\n                \"humidity\": 57,\n                \"temp_kf\": 0\n            },\n            \"weather\": [\n                {\n                    \"id\": 804,\n                    \"main\": \"Clouds\",\n                    \"description\": \"overcast clouds\",\n                    \"icon\": \"04d\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 97\n            },\n            \"wind\": {\n                \"speed\": 5.99,\n                \"deg\": 5,\n                \"gust\": 7.19\n            },\n            \"visibility\": 10000,\n            \"pop\": 0,\n            \"sys\": {\n                \"pod\": \"d\"\n            },\n            \"dt_txt\": \"2023-05-15 12:00:00\"\n        },\n        {\n            \"dt\": 1684162800,\n            \"main\": {\n                \"temp\": 13.13,\n                \"feels_like\": 11.93,\n                \"temp_min\": 13.13,\n                \"temp_max\": 13.13,\n                \"pressure\": 1021,\n                \"sea_level\": 1021,\n                \"grnd_level\": 1018,\n                \"humidity\": 55,\n                \"temp_kf\": 0\n            },\n            \"weather\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 97\n            },\n            \"wind\": {\n                \"speed\": 4.33,\n                \"deg\": 7,\n                \"gust\": 6.64\n            },\n            \"visibility\": 10000,\n            \"pop\": 0.28,\n            \"rain\": {\n                \"3h\": 0.13\n            },\n            \"sys\": {\n                \"pod\": \"d\"\n            },\n            \"dt_txt\": \"2023-05-15 15:00:00\"\n        },\n        {\n            \"dt\": 1684173600,\n            \"main\": {\n                \"temp\": 11.28,\n                \"feels_like\": 10.32,\n                \"temp_min\": 11.28,\n                \"temp_max\": 11.28,\n                \"pressure\": 1022,\n                \"sea_level\": 1022,\n                \"grnd_level\": 1019,\n                \"humidity\": 71,\n                \"temp_kf\": 0\n            },\n            \"weather\": [\n                {\n                    \"id\": 500,\n                    \"main\": \"Rain\",\n                    \"description\": \"light rain\",\n                    \"icon\": \"10d\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 83\n            },\n            \"wind\": {\n                \"speed\": 3.91,\n                \"deg\": 23,\n                \"gust\": 7.01\n            },\n            \"visibility\": 10000,\n            \"pop\": 0.52,\n            \"rain\": {\n                \"3h\": 0.57\n            },\n            \"sys\": {\n                \"pod\": \"d\"\n            },\n            \"dt_txt\": \"2023-05-15 18:00:00\"\n        },\n        {\n            \"dt\": 1684184400,\n            \"main\": {\n                \"temp\": 8.51,\n                \"feels_like\": 7.89,\n                \"temp_min\": 8.51,\n                \"temp_max\": 8.51,\n                \"pressure\": 1024,\n                \"sea_level\": 1024,\n                \"grnd_level\": 1021,\n                \"humidity\": 77,\n                \"temp_kf\": 0\n            },\n            \"weather\": [\n                {\n                    \"id\": 802,\n                    \"main\": \"Clouds\",\n                    \"description\": \"scattered clouds\",\n                    \"icon\": \"03n\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 30\n            },\n            \"wind\": {\n                \"speed\": 1.55,\n                \"deg\": 5,\n                \"gust\": 3.76\n            },\n            \"visibility\": 10000,\n            \"pop\": 0,\n            \"sys\": {\n                \"pod\": \"n\"\n            },\n            \"dt_txt\": \"2023-05-15 21:00:00\"\n        },\n        {\n            \"dt\": 1684195200,\n            \"main\": {\n                \"temp\": 7.22,\n                \"feels_like\": 6.49,\n                \"temp_min\": 7.22,\n                \"temp_max\": 7.22,\n                \"pressure\": 1024,\n                \"sea_level\": 1024,\n                \"grnd_level\": 1021,\n                \"humidity\": 76,\n                \"temp_kf\": 0\n            },\n            \"weather\": [\n                {\n                    \"id\": 801,\n                    \"main\": \"Clouds\",\n                    \"description\": \"few clouds\",\n                    \"icon\": \"02n\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 18\n            },\n            \"wind\": {\n                \"speed\": 1.49,\n                \"deg\": 334,\n                \"gust\": 2.34\n            },\n            \"visibility\": 10000,\n            \"pop\": 0,\n            \"sys\": {\n                \"pod\": \"n\"\n            },\n            \"dt_txt\": \"2023-05-16 00:00:00\"\n        },\n        {\n            \"dt\": 1684206000,\n            \"main\": {\n                \"temp\": 6.44,\n                \"feels_like\": 5.6,\n                \"temp_min\": 6.44,\n                \"temp_max\": 6.44,\n                \"pressure\": 1024,\n                \"sea_level\": 1024,\n                \"grnd_level\": 1021,\n                \"humidity\": 84,\n                \"temp_kf\": 0\n            },\n            \"weather\": [\n                {\n                    \"id\": 800,\n                    \"main\": \"Clear\",\n                    \"description\": \"clear sky\",\n                    \"icon\": \"01n\"\n                }\n            ],\n            \"clouds\": {\n                \"all\": 5\n            },\n            \"wind\": {\n                \"speed\": 1.49,\n                \"deg\": 290,\n                \"gust\": 2.6\n            },\n            \"visibility\": 10000,\n            \"pop\": 0,\n            \"sys\": {\n                \"pod\": \"n\"\n            },\n            \"dt_txt\": \"2023-05-16 03:00:00\"\n        }\n    ],\n    \"city\": {\n        \"id\": 2643743,\n        \"name\": \"London\",\n        \"coord\": {\n            \"lat\": 51.5085,\n            \"lon\": -0.1257\n        },\n        \"country\": \"GB\",\n        \"population\": 1000000,\n        \"timezone\": 3600,\n        \"sunrise\": 1684123758,\n        \"sunset\": 1684179874\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:8000/weather/history/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"city\":\"London\",\r\n    \"month\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/weather/history/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"weather",
+						"history",
+						""
+					]
+				},
+				"description": "Service isnt working for some reason"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"city\":\"Sarajevo,BA\"}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/weather/history/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"weather",
+								"history",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:8000/weather/history/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/weather/history/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"weather",
+						"history",
+						""
+					]
+				},
+				"description": "It should return yearly statistics for the given place"
+			},
+			"response": [
+				{
+					"name": "Default",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/weather/history/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"weather",
+								"history",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	]
+}
